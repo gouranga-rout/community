@@ -55,7 +55,7 @@ const App = () => {
         <AboutMe />
         <FAQ />
         <ScrollToTopButton />
-        <Footer />
+        
 
         {/* Define Routes */}
         <Routes>
@@ -66,6 +66,7 @@ const App = () => {
 
         <Popup isVisible={isPopupVisible} onClose={handlePopupClose} />
       </Router>
+      <Footer />
     </ReferralProvider>
   );
 };

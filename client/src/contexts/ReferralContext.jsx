@@ -1,34 +1,29 @@
-// src/contexts/ReferralContext.jsx
+// client/src/contexts/ReferralContext.jsx
+import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
-import { createContext, useContext, useState } from 'react';
-
-// Create Context for Referral and Auth
 const ReferralContext = createContext();
 
-// Context Provider Component
 export const ReferralProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // User state
-  const [referralLink, setReferralLink] = useState(''); // Referral link state
+  const [referralLink, setReferralLink] = useState("");
 
-  const login = (userData) => {
-    setUser(userData);
-    setReferralLink(userData.referralLink); // Assuming userData has referralLink
-  };
-
-  const logout = () => {
-    setUser(null);
-    setReferralLink('');
-  };
+  useEffect(() => {
+    const fetchReferral = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/referral");
+        setReferralLink(res.data.referralLink);
+      } catch (err) {
+        console.error("Error fetching referral:", err);
+      }
+    };
+    fetchReferral();
+  }, []);
 
   return (
-    <ReferralContext.Provider value={{ user, referralLink, login, logout }}>
+    <ReferralContext.Provider value={{ referralLink }}>
       {children}
     </ReferralContext.Provider>
   );
 };
 
-// Custom Hook to use the Referral Context
-export const useReferralContext = () => {
-  return useContext(ReferralContext);
-};
-
+export const useReferralContext = () => useContext(ReferralContext);
