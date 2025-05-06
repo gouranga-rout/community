@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // Replace with your backend login API endpoint
-      const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const { data } = await axios.post('https://community-fc8g.onrender.com/api/auth/login', { email, password });
       login(data); // Set the user data in context
       navigate('/dashboard'); // Redirect to Dashboard
     } catch (error) {
