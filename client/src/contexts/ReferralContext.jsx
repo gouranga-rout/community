@@ -10,7 +10,7 @@ export const ReferralProvider = ({ children }) => {
   useEffect(() => {
     const fetchReferral = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/referral");
+        const res = await axios.get("https://community-fc8g.onrender.com/api/referral");
         setReferralLink(res.data.referralLink);
       } catch (err) {
         console.error("Error fetching referral:", err);

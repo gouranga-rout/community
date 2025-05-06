@@ -16,6 +16,7 @@ import AboutMe from './components/AboutMe';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import PromotorInvitation from './components/PromotorInvitation';
 
 // Pages
 import Login from './pages/Login';
@@ -55,7 +56,7 @@ const App = () => {
         <AboutMe />
         <FAQ />
         <ScrollToTopButton />
-        
+        <PromotorInvitation />        
 
         {/* Define Routes */}
         <Routes>
