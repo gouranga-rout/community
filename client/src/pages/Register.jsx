@@ -1,5 +1,3 @@
-// src/pages/Register.jsx
-
 import React, { useState } from 'react';
 import { useReferralContext } from '../contexts/ReferralContext';
 import axios from 'axios';
@@ -7,18 +5,26 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useReferralContext(); // Accessing login function from context
+  const { login } = useReferralContext();
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      // Replace with your backend register API endpoint
-      const { data } = await axios.post('https://community-fc8g.onrender.com/api/auth/register', { username, email, password });
-      login(data); // Set the user data in context
-      navigate('/dashboard'); // Redirect to Dashboard
+      const { data } = await axios.post('https://community-fc8g.onrender.com/api/auth/register', {
+        username,
+        fullName,
+        email,
+        mobile,
+        password,
+      });
+
+      login(data);
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error during registration', error);
     }
@@ -35,10 +41,22 @@ const Register = () => {
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
+          type="text"
+          placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
+        <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Mobile"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
         />
         <input
           type="password"
@@ -53,3 +71,4 @@ const Register = () => {
 };
 
 export default Register;
+
